@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/discountFragment">
+
+    <fragment
+        android:id="@+id/discountFragment"
+        android:name="com.mustadevs.goriapp.ui.discount.DiscountFragment"
+        android:label="fragment_discount"
+        tools:layout="@layout/fragment_discount" />
+    <fragment
+        android:id="@+id/featuredFragment"
+        android:name="com.mustadevs.goriapp.ui.featured.FeaturedFragment"
+        android:label="fragment_featured"
+        tools:layout="@layout/fragment_featured" />
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.mustadevs.goriapp.ui.products.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" />
+</navigation>
