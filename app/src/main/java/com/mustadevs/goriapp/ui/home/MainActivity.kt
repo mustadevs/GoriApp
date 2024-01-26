@@ -8,6 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.mustadevs.goriapp.R
 import com.mustadevs.goriapp.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -30,3 +31,5 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.setupWithNavController(navController)
     }
 }
+
+annotation class AndroidEntryPoint

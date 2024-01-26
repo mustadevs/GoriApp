@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/featuredFragment"
-        android:title="Destacados"
-        android:icon="@drawable/ic_destacado"/>
 
     <item
-        android:id="@+id/productsFragment"
-        android:title="Busqueda"
-        android:icon="@drawable/ic_search"
-        />
+        android:id="@+id/discountFragment"
+        android:title="Inicio"
+        android:icon="@drawable/nav_home"/>
+
+    <item
+        android:id="@+id/featuredFragment"
+        android:title="Lanzamientos"
+        android:icon="@drawable/ic_destacado"/>
 
     <item
         android:title="GORI"/>
 
     <item
-        android:id="@+id/discountFragment"
-        android:title="Descuentos"
+        android:id="@+id/productsFragment"
+        android:title="Productos"
         android:icon="@drawable/ic_shopping_bag" />
 
     <item
-        android:id="@+id/notificaciones"
+        android:id="@+id/design_bottom_sheet"
         android:title="Notificaciones"
         android:icon="@drawable/ic_notifications" />
 </menu>

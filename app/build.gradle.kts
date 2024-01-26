@@ -1,6 +1,13 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    //Dagger Hilt
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+
+    //Safeargs
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -54,4 +61,10 @@ dependencies {
 
     //Floating Action Button
     implementation("com.google.android.material:material:1.3.0-alpha03")
+
+    //DaggerHilt
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
 }
+

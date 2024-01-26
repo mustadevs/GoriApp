@@ -2,4 +2,14 @@
     <string name="app_name">GoriApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Products -->
+    <string name="BuzoAmarillo">Buzo Amarillo Gori</string>
+    <string name="BuzoVerde">Buzo Verde Gori</string>
+    <string name="BuzoNaranja">Buzo Naranja Gori</string>
+    <string name="RemeraBlanca">Remera Blanca Gori</string>
+    <string name="RemeraNegra">Remera Negra Gori</string>
+    <string name="RemeraJero">Remera Blanca Gori</string>
+    <string name="RemeraDoblada">Remera Blanca Gori</string>
+    <string name="BuzoVerdeOscuro">Buzo Verde Gori</string>
 </resources>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/discountFragment"
-        android:name="com.mustadevs.goriapp.ui.discount.DiscountFragment"
+        android:name="com.mustadevs.goriapp.ui.more.MoreFragment"
         android:label="fragment_discount"
         tools:layout="@layout/fragment_discount" />
     <fragment
