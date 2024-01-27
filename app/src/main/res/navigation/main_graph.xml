@@ -19,5 +19,18 @@
         android:id="@+id/productsFragment"
         android:name="com.mustadevs.goriapp.ui.products.ProductsFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_productsFragment_to_productsDetailActivity"
+            app:destination="@id/productsDetailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/productsDetailActivity"
+        android:name="com.mustadevs.goriapp.ui.detail.ProductsDetailActivity"
+        android:label="activity_products_detail"
+        tools:layout="@layout/activity_products_detail" >
+        <argument
+            android:name="type"
+            app:argType="com.mustadevs.goriapp.domain.model.ProductsModel" />
+    </activity>
 </navigation>
