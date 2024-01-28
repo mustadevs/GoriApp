@@ -6,17 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mustadevs.goriapp.R
 import com.mustadevs.goriapp.databinding.FragmentProductsBinding
-
-import com.mustadevs.goriapp.domain.model.ProductsModel.*
 import com.mustadevs.goriapp.ui.home.AndroidEntryPoint
 import com.mustadevs.goriapp.ui.products.adapter.ProductsAdapter
 import kotlinx.coroutines.launch
@@ -44,6 +40,9 @@ class ProductsFragment : Fragment() {
     private fun initList() {
         productsAdapter = ProductsAdapter(onItemSelected = {
             Toast.makeText(context, getString(it.name), Toast.LENGTH_SHORT).show()
+            //findNavController().navigate(
+            //    ProductsFragmentDirections.actionProductsFragmentToProductsDetailActivity()
+            //)
         })
 
         binding.rvProducts.apply {
