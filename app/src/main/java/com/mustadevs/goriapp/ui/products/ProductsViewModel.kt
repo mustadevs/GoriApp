@@ -1,6 +1,7 @@
 package com.mustadevs.goriapp.ui.products
 
 import androidx.lifecycle.ViewModel
+import com.mustadevs.goriapp.data.providers.ProductsProvider
 import com.mustadevs.goriapp.domain.model.ProductsInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

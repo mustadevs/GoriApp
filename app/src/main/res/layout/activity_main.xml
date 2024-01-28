@@ -22,6 +22,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_gravity="center"
+        android:fontFamily="@font/oswald"
         android:text="@string/app_name"/>
     </FrameLayout>
 

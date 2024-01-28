@@ -29,5 +29,22 @@
         android:name="com.mustadevs.goriapp.ui.detail.ProductsDetailActivity"
         android:label="activity_products_detail"
         tools:layout="@layout/activity_products_detail" >
+        <argument
+            android:name="type"
+            app:argType="com.mustadevs.goriapp.domain.model.ProductsModel" />
     </activity>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.mustadevs.goriapp.ui.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_notificationsFragment_to_notificationsDetailActivity"
+            app:destination="@id/notificationsDetailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/notificationsDetailActivity"
+        android:name="com.mustadevs.goriapp.ui.detail.NotificationsDetailActivity"
+        android:label="activity_notifications_detail"
+        tools:layout="@layout/activity_notifications_detail" />
 </navigation>

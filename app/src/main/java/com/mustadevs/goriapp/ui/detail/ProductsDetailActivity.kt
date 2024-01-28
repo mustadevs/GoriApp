@@ -14,12 +14,12 @@ class ProductsDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductsDetailBinding
     private val productsDetailViewModel:ProductsDetailViewModel by viewModels()
 
-    //private val args:ProductsDetailActivityArgs by navArgs()
+    private val args:ProductsDetailActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductsDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //args.type
+        args.type
     }
 }
