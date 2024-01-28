@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/discountFragment"
+        android:id="@+id/homeFragment"
         android:title="Inicio"
         android:icon="@drawable/nav_home"/>
 
@@ -20,7 +20,8 @@
         android:icon="@drawable/ic_destacado"/>
 
     <item
-        android:id="@+id/design_bottom_sheet"
+        android:id="@+id/notificationsFragment"
         android:title="Notificaciones"
         android:icon="@drawable/ic_notifications" />
+
 </menu>
