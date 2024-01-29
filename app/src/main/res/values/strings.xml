@@ -12,4 +12,7 @@
     <string name="RemeraJero">Remera Blanca Gori</string>
     <string name="RemeraDoblada">Remera Blanca Gori</string>
     <string name="BuzoVerdeOscuro">Buzo Verde Gori</string>
+
+    <!-- Discoutn QR-->
+    <string name="DiscountImageQR">Descuento especial</string>
 </resources>
