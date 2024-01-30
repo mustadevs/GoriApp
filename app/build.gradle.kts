@@ -2,6 +2,10 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 
+    //Google
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.google.relay") version "0.3.00"
+
     //Dagger Hilt
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
@@ -72,5 +76,9 @@ dependencies {
 
     //Google Ads
     implementation ("com.google.android.gms:play-services-ads:22.5.0")
+
+    implementation("com.google.android.gms:play-services-ads:22.6.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.material:material:1.8.0")
 }
 

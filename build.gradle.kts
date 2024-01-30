@@ -8,4 +8,8 @@ plugins {
 
     //safeargs
     id("androidx.navigation.safeargs.kotlin") version "2.7.1" apply false
+
+    //Google
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
+    id("com.google.relay") version "0.3.00"
 }
