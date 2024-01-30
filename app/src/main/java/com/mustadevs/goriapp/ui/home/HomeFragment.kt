@@ -5,19 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.mustadevs.goriapp.R
 import com.mustadevs.goriapp.databinding.FragmentHomeBinding
 import com.mustadevs.goriapp.ui.detail.DiscountDetailActivity
-
+import com.mustadevs.goriapp.ui.home.adapter.HorizontalRecyclerViewAdapter
 
 class HomeFragment : Fragment() {
 
-
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: HorizontalRecyclerViewAdapter
 
     private var binding: FragmentHomeBinding? = null
 
@@ -35,6 +34,12 @@ class HomeFragment : Fragment() {
             startActivity(intent)
 
         }
+        // Inicializa y configura el RecyclerView
+        recyclerView = view?.findViewById(R.id.recyclerViewHorizontal) ?: RecyclerView(requireContext())
+        adapter = HorizontalRecyclerViewAdapter()
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = adapter
 
         return view
     }
