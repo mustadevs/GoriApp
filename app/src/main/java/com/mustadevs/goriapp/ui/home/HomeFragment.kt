@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding?.root
 
-        // Agrega un OnClickListener al CardView de Descuentos
+        // Agrega un OnClickListener al CardView de DESCUENTOS
         binding?.viewDesc?.setOnClickListener {
             // Cuando se hace clic en Descuentos, inicia DiscountDetailActivity
             val intent = Intent(activity, DiscountDetailActivity::class.java)
@@ -44,24 +44,25 @@ class HomeFragment : Fragment() {
             MobileAds.initialize(requireActivity())
             initInterstitialAds()
         }
-        // Agrega un OnClickListener a viewDest
+        // Agrega un OnClickListener a viewDest para ir a PRODUCTOS
         binding?.viewDest?.setOnClickListener {
             // Utiliza la acción para navegar a ProductsFragment
             findNavController().navigate(R.id.action_homeFragment_to_productsFragment)
         }
 
-        // Agrega un OnClickListener al CardView de Descuentos
+        // Agrega un OnClickListener al CardView de NUESTRA HISTORIA
         binding?.viewQuien?.setOnClickListener {
             // Utiliza la acción para navegar a ProductsFragment
             findNavController().navigate(R.id.action_homeFragment_to_historyDetailActivity)
         }
 
+        // Ir a seccion CONTACTO
         binding?.viewContacto?.setOnClickListener {
             // Cuando se hace clic en Contacto, inicia el link de whatsapp
             openUrl("https://bit.ly/WhatsappGORI")
         }
 
-        //Boton donde encontrarnos
+        // Ir a seccion DONDE ENCONTRARNOS
         binding?.viewUbicacion?.setOnClickListener {
             // Cuando se hace clic en Descuentos, inicia DiscountDetailActivity
             val intent = Intent(activity, WhereDetailActivity::class.java)
@@ -76,7 +77,6 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
 
 
     //Siguientes 2 funciones para ads de video interstelar
