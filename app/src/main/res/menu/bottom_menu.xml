@@ -20,7 +20,7 @@
         android:icon="@drawable/ic_destacado"/>
 
     <item
-        android:id="@+id/notificationsFragment"
+        android:id="@+id/newsFragment"
         android:title="Novedades"
         android:icon="@drawable/ic_notifications" />
 
