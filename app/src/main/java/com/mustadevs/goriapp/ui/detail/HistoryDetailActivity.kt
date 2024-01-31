@@ -29,7 +29,7 @@ class HistoryDetailActivity : AppCompatActivity(){
     }
     private fun initLoadAds() {
         val adRequest= AdRequest.Builder().build()
-        binding.banner4.loadAd(adRequest)
+        binding.googleAd2.loadAd(adRequest)
     }
 
 

@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    android:background="#FFFFFF"
+    app:cardBackgroundColor="#FFFFFF">
 
     //BOTON DESCUENTOS
     <androidx.cardview.widget.CardView
@@ -14,11 +16,13 @@
         android:layout_height="150dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="@color/black"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toStartOf="@+id/viewDest"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardElevation="12dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:outlineSpotShadowColor="#000000"        >
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -27,11 +31,10 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/ic_discount"
-                app:tint="@color/white"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="0dp"
+                android:src="@drawable/ic_regalo"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -39,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="Descuentos"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 tools:ignore="HardcodedText"
                 style="@style/Title"
                 android:textSize="20dp"/>
@@ -56,11 +59,14 @@
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/viewDesc"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardElevation="12dp"
+        app:layout_constraintHorizontal_bias="0.5"
+         >
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -69,19 +75,18 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_shopping_bag"
-                app:tint="@color/white"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_logo_boca_abierta"
                 tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="0dp"
                 android:text="Productos"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 tools:ignore="HardcodedText"
                 style="@style/Title"
                 android:textSize="20dp"/>
@@ -102,7 +107,9 @@
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewDesc">
+        app:layout_constraintTop_toBottomOf="@+id/viewDesc"
+        app:cardElevation="12dp"
+        app:layout_constraintHorizontal_bias="0.5">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -145,11 +152,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHorizontal">
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHorizontal"
+        app:cardElevation="12dp"
+        app:layout_constraintHorizontal_bias="0.5">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -163,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DONDE ENCONTRARNOS"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 style="@style/Title"
                 android:textSize="20dp"
                 android:textStyle="bold"

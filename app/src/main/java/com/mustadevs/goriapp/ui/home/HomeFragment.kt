@@ -6,10 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.mustadevs.goriapp.R
 import com.mustadevs.goriapp.databinding.FragmentHomeBinding
 import com.mustadevs.goriapp.ui.detail.DiscountDetailActivity
@@ -21,7 +26,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HorizontalRecyclerViewAdapter
-
+    private var interstitial: InterstitialAd? = null
     private var binding: FragmentHomeBinding? = null
 
     override fun onCreateView(
@@ -36,6 +41,8 @@ class HomeFragment : Fragment() {
             // Cuando se hace clic en Descuentos, inicia DiscountDetailActivity
             val intent = Intent(activity, DiscountDetailActivity::class.java)
             startActivity(intent)
+            MobileAds.initialize(requireActivity())
+            initInterstitialAds()
         }
         // Agrega un OnClickListener a viewDest
         binding?.viewDest?.setOnClickListener {
@@ -68,6 +75,41 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = adapter
 
         return view
+    }
+
+
+
+    //Siguientes 2 funciones para ads de video interstelar
+    private fun showInterstitial() {
+        if(interstitial!=null){
+            interstitial!!.show(requireActivity())
+            interstitial=null
+        }else{
+
+            initInterstitialAds()
+            //binding.viewDesc.isEnabled = false
+        }
+    }
+    private fun initInterstitialAds() {
+        var adRequest = com.google.android.gms.ads.AdRequest.Builder().build()
+
+        InterstitialAd.load(requireActivity(), "ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback(){
+            override fun onAdLoaded(interstitialAd : InterstitialAd) {
+                interstitial = interstitialAd
+                Toast.makeText(requireActivity(), "Anuncio encontrado", Toast.LENGTH_SHORT).show()
+
+                //binding.viewDesc.isEnabled=true
+                showInterstitial()
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                interstitial=null
+                Toast.makeText(requireActivity(), "Verifique su conexion", Toast.LENGTH_SHORT).show()
+                //binding.viewDesc.isEnabled=true
+            }
+        }
+
+        )
     }
 
     /*Funcion que abre link de whatsapp*/
