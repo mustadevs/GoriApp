@@ -10,7 +10,6 @@ import com.mustadevs.goriapp.R
 import com.mustadevs.goriapp.databinding.FragmentFeaturedBinding
 import com.mustadevs.goriapp.ui.featured.adapter.FeaturedRecyclerViewAdapter
 
-
 class FeaturedFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FeaturedRecyclerViewAdapter
@@ -29,7 +28,6 @@ class FeaturedFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
-
         return view
     }
 

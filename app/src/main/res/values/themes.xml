@@ -5,7 +5,7 @@
 
     </style>
 
-    <style name="Theme.GoriApp" parent="Base.Theme.GoriApp"/>
+    <style name="Theme.GoriApp" parent="Theme.Material3.DayNight.NoActionBar"/>
 
     <style name="Title">
         <item name="android:textStyle">bold</item>

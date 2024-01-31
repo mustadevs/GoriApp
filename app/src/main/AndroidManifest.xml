@@ -25,9 +25,6 @@
             android:name=".ui.detail.DiscountDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.NotificationsDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.detail.ProductsDetailActivity"
             android:exported="false" />
         <activity
