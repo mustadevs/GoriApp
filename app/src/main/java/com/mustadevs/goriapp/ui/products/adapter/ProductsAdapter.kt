@@ -7,11 +7,11 @@ import com.mustadevs.goriapp.R
 import com.mustadevs.goriapp.domain.model.ProductsInfo
 
 class ProductsAdapter(private var productsList:List<ProductsInfo> = emptyList(),
-    private val onItemSelected:(ProductsInfo) -> Unit):
+                      private val onItemSelected:(ProductsInfo) -> Unit):
     RecyclerView.Adapter<ProductsViewHolder>() {
-
-    fun updateList(list: List<ProductsInfo>){
-        productsList = list
+    private var productList: List<ProductsInfo> = emptyList()
+    fun updateList(newList: List<ProductsInfo>){
+        productsList = newList
         notifyDataSetChanged()
     }
 
@@ -25,6 +25,6 @@ class ProductsAdapter(private var productsList:List<ProductsInfo> = emptyList(),
 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         holder.render(productsList[position], onItemSelected)
-        }
+    }
 
 }

@@ -83,5 +83,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:22.6.0")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation("com.google.android.material:material:1.8.0")
+
+    //clases selladas sealed class
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
 }
 
