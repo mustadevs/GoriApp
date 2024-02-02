@@ -35,7 +35,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginBottom="0dp"
-                android:src="@drawable/ic_regalo"
+                android:src="@drawable/ic_paquete_regalo"
                 tools:ignore="ContentDescription" />
 
             <TextView

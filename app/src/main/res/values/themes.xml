@@ -1,8 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.GoriApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.GoriApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/white</item>
-
     </style>
 
 
