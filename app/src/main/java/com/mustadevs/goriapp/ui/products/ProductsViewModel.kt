@@ -18,7 +18,7 @@ class ProductsViewModel @Inject constructor() :
 
     init {
         _products.value = listOf(
-            BuzoAmarillo, BuzoVerde, BuzoNaranja, RemeraBlanca, RemeraNegra, RemeraJero, RemeraDoblada, BuzoVerdeOscuro
+            taurus, BuzoVerde, BuzoNaranja, RemeraBlanca, RemeraNegra, RemeraJero, RemeraDoblada, BuzoVerdeOscuro
         )
     }
 }

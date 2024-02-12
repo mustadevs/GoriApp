@@ -3,7 +3,7 @@ package com.mustadevs.goriapp.domain.model
 import com.mustadevs.goriapp.R
 
 sealed class ProductsInfo(val img:Int, val name:Int) {
-    data object BuzoAmarillo:ProductsInfo(R.drawable.ic_buzo_amarillo, R.string.BuzoAmarillo)
+    data object taurus:ProductsInfo(R.drawable.ic_buzo_amarillo, R.string.taurus)
     data object BuzoVerde:ProductsInfo(R.drawable.ic_buzo_verde, R.string.BuzoVerde)
     data object BuzoNaranja:ProductsInfo(R.drawable.ic_buzo_naranja, R.string.BuzoNaranja)
     data object RemeraBlanca:ProductsInfo(R.drawable.ic_remera_blanca, R.string.RemeraBlanca)

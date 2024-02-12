@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "100761570152",
+    "project_id": "goriapp-9e5cb",
+    "storage_bucket": "goriapp-9e5cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100761570152:android:568a11906be3d3429be4dd",
+        "android_client_info": {
+          "package_name": "com.mustadevs.goriapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEpXlfIQMjfUkYzkEf5_HAR9YrxcRbMjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

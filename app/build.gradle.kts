@@ -12,6 +12,10 @@ plugins {
 
     //Safeargs
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
+
+    //Firebase
+    //id("kotlin-android-extensions")
 }
 
 android {
@@ -58,6 +62,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.firebase:firebase-database:20.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -69,8 +74,8 @@ dependencies {
 
 
     //DaggerHilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-android-compiler:2.50")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -83,5 +88,19 @@ dependencies {
 
     //clases selladas sealed class
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //Firebase  Gradle
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    //Notification Badge
+    implementation("com.nex3z:notification-badge:1.0.4")
+    //Eventbus
+    implementation("org.greenrobot:eventbus:3.2.0")
+
+
 }
 

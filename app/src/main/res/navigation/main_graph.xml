@@ -43,17 +43,12 @@
             android:id="@+id/action_homeFragment_to_historyDetailActivity"
             app:destination="@id/historyDetailActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_featuredFragment"
             app:destination="@id/featuredFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/newsFragment"
-        android:name="com.mustadevs.goriapp.ui.news.NewsFragment"
-        android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
     <activity
         android:id="@+id/discountDetailActivity"
         android:name="com.mustadevs.goriapp.ui.detail.DiscountDetailActivity"
@@ -64,4 +59,9 @@
         android:name="com.mustadevs.goriapp.ui.detail.HistoryDetailActivity"
         android:label="activity_history_detail"
         tools:layout="@layout/activity_history_detail" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.mustadevs.goriapp.ui.news.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
 </navigation>

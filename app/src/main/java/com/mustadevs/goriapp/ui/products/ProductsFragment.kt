@@ -1,53 +1,114 @@
 package com.mustadevs.goriapp.ui.products
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.mustadevs.goriapp.R
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.mustadevs.goriapp.data.listener.ProductsLoadListener
 import com.mustadevs.goriapp.databinding.FragmentProductsBinding
-import com.mustadevs.goriapp.domain.model.ProductsInfo
-import com.mustadevs.goriapp.domain.model.ProductsInfo.*
 import com.mustadevs.goriapp.domain.model.ProductsModel
-import com.mustadevs.goriapp.ui.home.AndroidEntryPoint
-import com.mustadevs.goriapp.ui.products.adapter.ProductsAdapter
-import kotlinx.coroutines.launch
+import com.mustadevs.goriapp.domain.utils.SpaceItemDecoration
+import com.mustadevs.goriapp.ui.products.adapter.MyProductsAdapter
 import java.util.Locale
 
-@AndroidEntryPoint
-class ProductsFragment : Fragment() {
+//@AndroidEntryPoint
+class ProductsFragment : Fragment(), ProductsLoadListener {
 
-    private val productsViewModel by viewModels<ProductsViewModel>()
-    private lateinit var productsAdapter: ProductsAdapter
-
+    lateinit var productsLoadListener: ProductsLoadListener
+    //private val productsViewModel by viewModels<ProductsViewModel>()
+    private lateinit var myProductsAdapter: MyProductsAdapter
+    private lateinit var productsModels: MutableList<ProductsModel>
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initUI()
-
+       super.onViewCreated(view, savedInstanceState)
+       initUI()
     }
 
     private fun initUI() {
+        productsModels = mutableListOf()
         initList()
+        loadProductsFromFirebase()
         initSearch()
-        initUIState()
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentProductsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+    private fun loadProductsFromFirebase() {
+        productsModels.clear() // Clear existing data if any
+
+        FirebaseDatabase.getInstance()
+            .getReference("Drink")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (productsSnapshot in snapshot.children) {
+                            val productsModel = productsSnapshot.getValue(ProductsModel::class.java)
+                            productsModel!!.key = productsSnapshot.key
+                            productsModels.add(productsModel)
+                        }
+
+                        // Log or print the retrieved data for debugging
+                        Log.d("FirebaseData", "Data: $productsModels")
+
+                        // Notify the listener that data has been loaded successfully
+                        productsLoadListener.onProductsLoadSuccess(productsModels)
+                    } else {
+                        productsLoadListener.onProductsLoadFailed("El item seleccionado no existe")
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    productsLoadListener.onProductsLoadFailed(error.message)
+                }
+            })
     }
 
+    private fun initList() {
+        productsLoadListener = this
+        _binding?.let {
+            val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+            binding.rvProducts.layoutManager = gridLayoutManager
+            binding.rvProducts.addItemDecoration(SpaceItemDecoration())
+        }
+
+        // Initialize the adapter only once when the fragment is created
+        myProductsAdapter = MyProductsAdapter(requireContext(), emptyList())
+        binding.rvProducts.adapter = myProductsAdapter
+    }
+
+    override fun onProductsLoadSuccess(productsModelList: List<ProductsModel>?) {
+        if (productsModelList.isNullOrEmpty()) {
+            Snackbar.make(binding.productsLayout, "No products available", Snackbar.LENGTH_LONG).show()
+        } else {
+            // Assuming you have the correct instance of the adapter
+            myProductsAdapter.updateList(productsModelList)
+        }
+    }
+
+        override fun onProductsLoadFailed(message: String?) {
+            Snackbar.make(binding.productsLayout,message!!,Snackbar.LENGTH_LONG).show()
+
+        }
+
+
     private fun initSearch() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -58,69 +119,69 @@ class ProductsFragment : Fragment() {
             }
         })
     }
+
     private fun filterList(query: String?) {
         if (query != null) {
-            val filteredList = mutableListOf<ProductsInfo>()
-            for (product in ProductsInfo::class.sealedSubclasses) {
-                val productObject = product.objectInstance
-                if (productObject is ProductsInfo && getString(productObject.name).toLowerCase(Locale.ROOT).contains(query)) {
-                    filteredList.add(productObject)
+            val filteredList = mutableListOf<ProductsModel>()
+            for (productModel in productsModels) {
+                if (productModel.name?.toLowerCase(Locale.ROOT)?.contains(query.toLowerCase(Locale.ROOT)) == true) {
+                    filteredList.add(productModel)
                 }
             }
-            productsAdapter.updateList(filteredList)
+            myProductsAdapter.updateList(filteredList)
         }
     }
+        //productsAdapter = ProductsAdapter(onItemSelected = { selectedProduct ->
+        //    val type = when (selectedProduct) {
+        //        taurus -> ProductsModel.gemini
+        //        BuzoNaranja -> ProductsModel.BuzoNaranja
+        //        BuzoVerde -> ProductsModel.BuzoVerde
+        //        BuzoVerdeOscuro -> ProductsModel.BuzoVerdeOscuro
+        //        RemeraBlanca -> ProductsModel.RemeraBlanca
+        //        RemeraDoblada -> ProductsModel.RemeraDoblada
+         //       RemeraJero -> ProductsModel.RemeraJero
+         //       RemeraNegra -> ProductsModel.RemeraNegra
+         //   }
+//
+           // findNavController().navigate(
+           //     ProductsFragmentDirections.actionProductsFragmentToProductsDetailActivity(type)
+          //  )
+       // })
+
+       // binding.rvProducts.apply {
+        //    layoutManager = LinearLayoutManager(context)
+        //    adapter = productsAdapter
+        //}
 
 
+    //private fun initUIState() {
+    //    lifecycleScope.launch {
+     //       repeatOnLifecycle(Lifecycle.State.STARTED){
+    //            productsViewModel.products.collect {
+     //               // Actualiza la lista de productos en el adaptador
+     //               myProductsAdapter.updateList(it)
+     //           }
+     //       }
+     //   }
+   // }
 
-    private fun initList() {
-        productsAdapter = ProductsAdapter(onItemSelected = { selectedProduct ->
-            val type = when (selectedProduct) {
-                BuzoAmarillo -> ProductsModel.BuzoAmarillo
-                BuzoNaranja -> ProductsModel.BuzoNaranja
-                BuzoVerde -> ProductsModel.BuzoVerde
-                BuzoVerdeOscuro -> ProductsModel.BuzoVerdeOscuro
-                RemeraBlanca -> ProductsModel.RemeraBlanca
-                RemeraDoblada -> ProductsModel.RemeraDoblada
-                RemeraJero -> ProductsModel.RemeraJero
-                RemeraNegra -> ProductsModel.RemeraNegra
-            }
-
-            findNavController().navigate(
-                ProductsFragmentDirections.actionProductsFragmentToProductsDetailActivity(type)
-            )
-        })
-
-        binding.rvProducts.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = productsAdapter
-        }
-    }
-
-    private fun initUIState() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                productsViewModel.products.collect {
-                    // Actualiza la lista de productos en el adaptador
-                    productsAdapter.updateList(it)
-                }
-            }
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentProductsBinding.inflate(layoutInflater, container, false)
+   // override fun onCreateView(
+    //    inflater: LayoutInflater, container: ViewGroup?,
+     //   savedInstanceState: Bundle?
+   // ): View {
+    //    _binding = FragmentProductsBinding.inflate(layoutInflater, container, false)
         // Infla el diseño para este fragmento
-        return binding.root
-    }
+    //    return binding.root
+   // }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+
+
+
+
+    //override fun onDestroy() {
+    //    super.onDestroy()
+    //    _binding = null
+   // }
 }
 

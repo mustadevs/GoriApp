@@ -7,8 +7,7 @@ import javax.inject.Inject
 class ProductsProvider @Inject constructor() {
     fun getProducts(): List<ProductsInfo> {
         return listOf(
-            BuzoAmarillo,
-            BuzoAmarillo,
+            taurus,
             BuzoVerde,
             BuzoNaranja,
             RemeraBlanca,

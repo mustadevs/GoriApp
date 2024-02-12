@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mustadevs.goriapp.R
-import com.mustadevs.goriapp.databinding.FragmentFeaturedBinding
 import com.mustadevs.goriapp.databinding.FragmentNewsBinding
 
 class NewsFragment : Fragment() {

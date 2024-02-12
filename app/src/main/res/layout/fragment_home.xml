@@ -104,7 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GORI: NUESTRA HISTORIA"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText"
                 style="@style/Title"
@@ -185,6 +185,7 @@
     </androidx.cardview.widget.CardView>
 
     //BOTON CONTACTO
+
     <androidx.cardview.widget.CardView
         android:id="@+id/viewContacto"
         android:layout_width="0dp"
@@ -205,11 +206,11 @@
 
             <TextView
                 android:id="@+id/textContacto"
+                style="@style/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CONTACTO"
                 android:textColor="@color/white"
-                style="@style/Title"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
@@ -217,8 +218,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
