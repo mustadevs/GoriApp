@@ -17,4 +17,7 @@ plugins {
     //Google
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
     id("com.google.relay") version "0.3.00"
+
+    //firebase
+    id("com.google.gms.google-services") version "4.4.1" apply false
 }

@@ -16,6 +16,9 @@
         android:theme="@style/Base.Theme.GoriApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.detail.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.BuyDetailActivity"
             android:exported="false" />
         <activity

@@ -62,9 +62,15 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignTop="@id/cartButton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
         android:layout_toEndOf="@id/cartButton"
-        app:nbMaxTextLength="2"
-        tools:layout_editor_absoluteX="365dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        android:layout_toRightOf="@id/cartButton"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/materialCardView"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:nbMaxTextLength="2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
