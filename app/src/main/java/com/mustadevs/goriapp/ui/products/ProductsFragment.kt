@@ -1,5 +1,6 @@
 package com.mustadevs.goriapp.ui.products
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.mustadevs.goriapp.databinding.FragmentProductsBinding
 import com.mustadevs.goriapp.domain.model.CartModel
 import com.mustadevs.goriapp.domain.model.ProductsModel
 import com.mustadevs.goriapp.domain.utils.SpaceItemDecoration
+import com.mustadevs.goriapp.ui.detail.CartActivity
 import com.mustadevs.goriapp.ui.products.adapter.MyProductsAdapter
 import com.mustadevs.goriapp.ui.products.eventbus.UpdateCartEvent
 import com.nex3z.notificationbadge.NotificationBadge
@@ -138,12 +140,16 @@ class ProductsFragment : Fragment(), ProductsLoadListener, CartLoadListener {
     }
 
     private fun initList() {
+        val cartButton = binding.cartButton
         productsLoadListener = this
         cartLoadListener = this
         _binding?.let {
             val gridLayoutManager = GridLayoutManager(requireContext(), 2)
             binding.rvProducts.layoutManager = gridLayoutManager
             binding.rvProducts.addItemDecoration(SpaceItemDecoration())
+
+            cartButton.setOnClickListener { startActivity(Intent(requireContext(), CartActivity::class.java))
+            }
         }
 
         // Initialize the adapter only once when the fragment is created
@@ -187,7 +193,7 @@ class ProductsFragment : Fragment(), ProductsLoadListener, CartLoadListener {
         }
     }
 
-    override fun onLoadCartSuccess(cartModelList: List<CartModel>) {
+    override fun onLoadCartSuccess(cartModelList: MutableList<CartModel>) {
         var cartSum = 0
         for (cartModel in cartModelList!!) cartSum+= cartModel!!.quantity
         badge!!.setNumber(cartSum)
