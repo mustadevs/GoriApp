@@ -79,62 +79,81 @@ class MyProductsAdapter(
     }
 
     private fun addToCart(productsModel: ProductsModel) {
-
         val userCart = FirebaseDatabase.getInstance()
             .getReference("Cart")
-            .child("UNIQUE_USER_ID") //can use firebase auth uid
+            .child("UNIQUE_USER_ID") // Puedes usar el UID del usuario de Firebase Auth
 
         userCart.child(productsModel.key!!)
-            .addListenerForSingleValueEvent(object:ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()) //if item already in cart, just update
-                    {
-                        val cartModel = snapshot.getValue(CartModel::class.java)
-                        val updateData: MutableMap<String, Any> = HashMap()
-                        cartModel!!.quantity = cartModel!!.quantity+1;
+                    val stock = productsModel.stock ?: 0 // Si stock es nulo, asigna 0
 
-                        updateData["quantity"] = cartModel!!.quantity
-                        updateData["totalPrice"] = cartModel!!.quantity * cartModel.price!!.toFloat()
+                    if (stock > 0) {
+                        // Si hay suficiente stock, realiza la lógica para agregar al carrito
+                        if (snapshot.exists()) {
+                            // Si el producto ya está en el carrito, solo actualiza la cantidad
+                            val cartModel = snapshot.getValue(CartModel::class.java)
+                            val updateData: MutableMap<String, Any> = HashMap()
+                            cartModel!!.quantity = cartModel!!.quantity + 1
 
-                        userCart.child(productsModel.key!!)
-                            .updateChildren(updateData)
-                            .addOnSuccessListener {
-                                EventBus.getDefault().postSticky(UpdateCartEvent())
-                                cartListener.onLoadCartFailed("Agregaste este producto al carro correctamente")
-                            }
-                            .addOnFailureListener { e ->
-                                cartListener.onLoadCartFailed(e.message)
-                                Log.d("MyProductsAdapter", "Failed to add product")
-                            }
-                    }
-                    else //if item not in cart, add new
-                    {
-                        val cartModel = CartModel()
-                        cartModel.key = productsModel.key
-                        cartModel.name = productsModel.name
-                        cartModel.image = productsModel.image
-                        cartModel.price = productsModel.price
-                        cartModel.quantity = 1
-                        cartModel.totalPrice = productsModel.price!!.toFloat()
+                            updateData["quantity"] = cartModel!!.quantity
+                            updateData["totalPrice"] = cartModel!!.quantity * cartModel.price!!.toFloat()
 
-                        userCart.child(productsModel.key!!)
-                            .setValue(cartModel)
-                            .addOnSuccessListener {
-                                EventBus.getDefault().postSticky(UpdateCartEvent())
-                                cartListener.onLoadCartFailed("Agregaste este producto al carro correctamente")
-                            }
-                            .addOnFailureListener{
-                                e -> cartListener.onLoadCartFailed(e.message)
-                            }
+                            userCart.child(productsModel.key!!)
+                                .updateChildren(updateData)
+                                .addOnSuccessListener {
+                                    // Notificar al EventBus sobre la actualización del carrito
+                                    EventBus.getDefault().postSticky(UpdateCartEvent())
+                                    cartListener.onLoadCartFailed("Agregaste este producto al carro correctamente")
+                                }
+                                .addOnFailureListener { e ->
+                                    cartListener.onLoadCartFailed(e.message)
+                                    Log.d("MyProductsAdapter", "Failed to add product")
+                                }
+                        } else {
+                            // Si el producto no está en el carrito, agrégalo como nuevo
+                            val cartModel = CartModel()
+                            cartModel.key = productsModel.key
+                            cartModel.name = productsModel.name
+                            cartModel.image = productsModel.image
+                            cartModel.price = productsModel.price
+                            cartModel.quantity = 1
+                            cartModel.totalPrice = productsModel.price!!.toFloat().toInt()
+
+                            userCart.child(productsModel.key!!)
+                                .setValue(cartModel)
+                                .addOnSuccessListener {
+                                    // Notificar al EventBus sobre la actualización del carrito
+                                    EventBus.getDefault().postSticky(UpdateCartEvent())
+                                    cartListener.onLoadCartFailed("Agregaste este producto al carro correctamente")
+                                }
+                                .addOnFailureListener { e ->
+                                    cartListener.onLoadCartFailed(e.message)
+                                }
+                        }
+
+                        // Reducir el stock en la base de datos
+                        val updatedStock = stock - productsModel.quantity
+                        FirebaseDatabase.getInstance()
+                            .getReference("Ropa")
+                            .child(productsModel.key!!)
+                            .child("stock")
+                            .setValue(updatedStock)
+                    } else {
+                        // Si no hay suficiente stock, muestra un mensaje al usuario
+                        cartListener.onLoadCartFailed("No hay mas stock. Lamentamos las molestias")
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
+                    // Manejar el error si es necesario
                     cartListener.onLoadCartFailed(error.message)
                 }
             })
-
     }
+
+
+
 
     fun updateList(newList: List<ProductsModel>) {
         list = newList

@@ -94,19 +94,20 @@ class MyCartAdapter(
 
     private fun plusCartItem(holder: MyCartAdapter.MyCartViewHolder, cartModel: CartModel) {
         cartModel.quantity += 1
-        cartModel.totalPrice = cartModel.quantity * cartModel.price!!.toFloat()
-        holder.txtQuantity!!.text = StringBuilder("").append(cartModel.quantity)
+        cartModel.totalPrice = (cartModel.quantity * cartModel.price!!.toFloat()).toInt()
+        holder.txtQuantity?.text= StringBuilder("").append(cartModel.quantity)
         updateFirebase(cartModel)
-
+        notifyItemChanged(holder.adapterPosition)
     }
 
     private fun minusCartItem(holder: MyCartAdapter.MyCartViewHolder, cartModel: CartModel) {
         if(cartModel.quantity > 1)
         {
             cartModel.quantity -= 1
-            cartModel.totalPrice = cartModel.quantity * cartModel.price!!.toFloat()
-            holder.txtQuantity!!.text = StringBuilder("").append(cartModel.quantity)
+            cartModel.totalPrice = (cartModel.quantity * cartModel.price!!.toFloat()).toInt()
+            holder.txtQuantity?.text = StringBuilder("").append(cartModel.quantity)
             updateFirebase(cartModel)
+            notifyItemChanged(holder.adapterPosition)
         }
     }
 
@@ -117,4 +118,8 @@ class MyCartAdapter(
             .child(cartModel.key!!)
             .setValue(cartModel)
             .addOnSuccessListener { EventBus.getDefault().postSticky(UpdateCartEvent()) } }
+
+    fun getCartModelList(): MutableList<CartModel> {
+        return cartModelList
+    }
     }

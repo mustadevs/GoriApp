@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/fragment_introduction">
 
     <fragment
         android:id="@+id/featuredFragment"
@@ -14,39 +14,26 @@
         android:id="@+id/productsFragment"
         android:name="com.mustadevs.goriapp.ui.products.ProductsFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" >
-        <action
-            android:id="@+id/action_productsFragment_to_productsDetailActivity"
-            app:destination="@id/productsDetailActivity" />
-    </fragment>
-    <activity
-        android:id="@+id/productsDetailActivity"
-        android:name="com.mustadevs.goriapp.ui.detail.ProductsDetailActivity"
-        android:label="activity_products_detail"
-        tools:layout="@layout/activity_products_detail" >
-        <argument
-            android:name="type"
-            app:argType="com.mustadevs.goriapp.domain.model.ProductsModel" />
-    </activity>
+        tools:layout="@layout/fragment_products" />
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/HomeFragment"
         android:name="com.mustadevs.goriapp.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_discountDetailActivity"
+            android:id="@+id/action_HomeFragment_to_discountDetailActivity"
             app:destination="@id/discountDetailActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_productsFragment"
+            android:id="@+id/action_HomeFragment_to_productsFragment"
             app:destination="@id/productsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_historyDetailActivity"
+            android:id="@+id/action_HomeFragment_to_historyDetailActivity"
             app:destination="@id/historyDetailActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_featuredFragment"
+            android:id="@+id/action_HomeFragment_to_featuredFragment"
             app:destination="@id/featuredFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_newsFragment"
+            android:id="@+id/action_HomeFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
     </fragment>
     <activity
@@ -63,5 +50,38 @@
         android:id="@+id/newsFragment"
         android:name="com.mustadevs.goriapp.ui.news.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/SignInActivity"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/LoginActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/LoginActivity"
+        android:label="LoginFragment"
+        tools:layout="@layout/activity_login">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/SignInActivity" />
+        <action
+            android:id="@+id/action_LoginActivity_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_introduction"
+        android:label="fragment_introduction"
+        tools:layout="@layout/fragment_introduction">
+        <action
+            android:id="@+id/action_fragment_introduction_to_loginFragment3"
+            app:destination="@id/LoginActivity" />
+        <action
+            android:id="@+id/action_fragment_introduction_to_SignInActivity"
+            app:destination="@id/SignInActivity" />
+    </fragment>
 </navigation>

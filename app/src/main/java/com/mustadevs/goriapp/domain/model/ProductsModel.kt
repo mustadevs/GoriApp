@@ -6,7 +6,9 @@ class ProductsModel: Serializable {
     var key:String?=null
     var name:String?=null
     var image:String?=null
-    var price:String?=null
+    var price: Int? = null
+    var stock: Int? = null
+    var quantity: Int = 0 // Campo para la cantidad seleccionada
 }
 //enum class ProductsModel {
   //  gemini,

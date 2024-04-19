@@ -56,6 +56,7 @@ class ProductsFragment : Fragment(), ProductsLoadListener, CartLoadListener {
     @Subscribe(threadMode= ThreadMode.MAIN,sticky=true)
     public fun onUpdateCartEvent(event:UpdateCartEvent)
     {
+        Log.d("ProductsFragment", "onUpdateCartEvent: Received")
         countCartFromFirebase()
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,6 +66,8 @@ class ProductsFragment : Fragment(), ProductsLoadListener, CartLoadListener {
     }
 
     private fun initUI() {
+        productsLoadListener = this
+        cartLoadListener = this
         productsModels = mutableListOf()
         initList()
         loadProductsFromFirebase()
@@ -113,7 +116,7 @@ class ProductsFragment : Fragment(), ProductsLoadListener, CartLoadListener {
         productsModels.clear() // Clear existing data if any
 
         FirebaseDatabase.getInstance()
-            .getReference("Drink")
+            .getReference("Ropa")
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -201,5 +204,6 @@ class ProductsFragment : Fragment(), ProductsLoadListener, CartLoadListener {
 
     override fun onLoadCartFailed(message: String?) {
         Snackbar.make(binding.productsLayout,message!!,Snackbar.LENGTH_LONG).show()
+        EventBus.getDefault().postSticky(UpdateCartEvent())
     }
 }

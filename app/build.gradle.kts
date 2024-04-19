@@ -62,6 +62,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
+    implementation("com.google.firebase:firebase-auth:22.3.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -103,7 +104,34 @@ dependencies {
     implementation("com.nex3z:notification-badge:1.0.4")
     //Eventbus
     implementation("org.greenrobot:eventbus:3.2.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1") // Asegúrate de utilizar la versión más reciente
 
 
+    //login
+    // Fragment
+    implementation ("androidx.fragment:fragment-ktx:1.4.1")
+    // Activity
+    implementation ("androidx.activity:activity-ktx:1.4.0")
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    // LiveData
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-rc01")
+    //Corrutinas
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1")
+    //Firebase
+
+
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("com.google.firebase:firebase-firestore-ktx")
+    //Timber
+    implementation ("com.jakewharton.timber:timber:4.7.1")
+    //Lottie
+    implementation ("com.airbnb.android:lottie:5.0.3")
+    testImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
 }
 

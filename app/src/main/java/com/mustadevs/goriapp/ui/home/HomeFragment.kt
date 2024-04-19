@@ -20,7 +20,6 @@ import com.mustadevs.goriapp.databinding.FragmentHomeBinding
 import com.mustadevs.goriapp.ui.detail.DiscountDetailActivity
 import com.mustadevs.goriapp.ui.detail.WhereDetailActivity
 import com.mustadevs.goriapp.ui.home.adapter.HorizontalRecyclerViewAdapter
-import com.mustadevs.goriapp.ui.products.ProductsFragment
 
 class HomeFragment : Fragment() {
 
@@ -33,6 +32,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding?.root
 
@@ -47,13 +47,13 @@ class HomeFragment : Fragment() {
         // Agrega un OnClickListener a viewDest para ir a PRODUCTOS
         binding?.viewDest?.setOnClickListener {
             // Utiliza la acción para navegar a ProductsFragment
-            findNavController().navigate(R.id.action_homeFragment_to_productsFragment)
+            findNavController().navigate(R.id.action_HomeFragment_to_productsFragment)
         }
 
         // Agrega un OnClickListener al CardView de NUESTRA HISTORIA
         binding?.viewQuien?.setOnClickListener {
             // Utiliza la acción para navegar a ProductsFragment
-            findNavController().navigate(R.id.action_homeFragment_to_historyDetailActivity)
+            findNavController().navigate(R.id.action_HomeFragment_to_historyDetailActivity)
         }
 
         // Ir a seccion CONTACTO

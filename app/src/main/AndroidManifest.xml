@@ -18,8 +18,11 @@
         <activity
             android:name=".ui.detail.CartActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.detail.BuyDetailActivity"
+        <activity android:name=".login.ui.login.LoginActivity"
+            android:exported="false" />
+        <activity android:name=".login.ui.signin.SignInActivity"
+            android:exported="false" />
+        <activity android:name=".login.ui.verification.VerificationActivity"
             android:exported="false" />
         <activity
             android:name=".ui.detail.WhereDetailActivity"
@@ -31,18 +34,32 @@
             android:name=".ui.detail.DiscountDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.ProductsDetailActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.MainActivity"
+            android:name=".login.ui.introduction.IntroductionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.detail.CongratsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_mercado_pago_api"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" >
 
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "yourapp://congrats" -->
+                <data android:scheme="yourapp"
+                    android:host="congrats" />
+
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_api_key" />
