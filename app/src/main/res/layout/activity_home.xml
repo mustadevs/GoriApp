@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeActivity">
 
     <FrameLayout
-        android:id="@+id/toolbar"
+        android:id="@+id/frame_container"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeFragment"
+        tools:context=".ui.home.HomeActivity"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-38dp">
 
@@ -61,7 +61,8 @@
             android:src="@drawable/nav_add"
             app:backgroundTint="@color/white"
             app:layout_anchor="@+id/bottomAppBar"
-            app:layout_anchorGravity="center" />
+            app:layout_anchorGravity="center"
+            android:contentDescription="@string/fab_description"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"

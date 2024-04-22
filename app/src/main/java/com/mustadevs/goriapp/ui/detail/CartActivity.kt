@@ -95,7 +95,7 @@ class CartActivity : AppCompatActivity(), CartLoadListener {
 
         val requestBody = jsonBody.toRequestBody("application/json".toMediaType())
 
-        val accessToken = "APP_USR-blabla"
+        val accessToken = "APP_USR-6925763596352070-020418-92969379f13f30df04396bca7528ebdd-378603507"
 
         val call = apiService.getMercadoPagoUrl("Bearer $accessToken", requestBody)
         call.enqueue(object : Callback<ApiResponse> {
