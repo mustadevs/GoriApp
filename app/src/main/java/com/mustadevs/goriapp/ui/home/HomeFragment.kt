@@ -1,9 +1,12 @@
 package com.mustadevs.goriapp.ui.home
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -23,18 +26,54 @@ import com.mustadevs.goriapp.ui.home.adapter.HorizontalRecyclerViewAdapter
 
 class HomeFragment : Fragment() {
 
+    interface NavigationBarListener {
+        fun showBottomNavigationBar(show: Boolean)
+    }
+
+    private var navigationBarListener: NavigationBarListener? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HorizontalRecyclerViewAdapter
     private var interstitial: InterstitialAd? = null
     private var binding: FragmentHomeBinding? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true) // Indica que este fragmento tiene un menú de opciones
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is NavigationBarListener) {
+            navigationBarListener = context
+            navigationBarListener?.showBottomNavigationBar(true)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding?.root
+
+        // Inicializa y configura el RecyclerView
+        recyclerView = view?.findViewById(R.id.recyclerViewHorizontal) ?: RecyclerView(requireContext())
+        adapter = HorizontalRecyclerViewAdapter()
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = adapter
+
+        return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.bottom_nav_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Agrega un OnClickListener al CardView de DESCUENTOS
         binding?.viewDesc?.setOnClickListener {
@@ -44,6 +83,7 @@ class HomeFragment : Fragment() {
             MobileAds.initialize(requireActivity())
             initInterstitialAds()
         }
+
         // Agrega un OnClickListener a viewDest para ir a PRODUCTOS
         binding?.viewDest?.setOnClickListener {
             // Utiliza la acción para navegar a ProductsFragment
@@ -68,29 +108,19 @@ class HomeFragment : Fragment() {
             val intent = Intent(activity, WhereDetailActivity::class.java)
             startActivity(intent)
         }
-        // Inicializa y configura el RecyclerView
-        recyclerView = view?.findViewById(R.id.recyclerViewHorizontal) ?: RecyclerView(requireContext())
-        adapter = HorizontalRecyclerViewAdapter()
-
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = adapter
-
-
-        return view
     }
 
-
-    //Siguientes 2 funciones para ads de video interstelar
+    // Función para mostrar el anuncio intersticial
     private fun showInterstitial() {
         if(interstitial!=null){
             interstitial!!.show(requireActivity())
             interstitial=null
         }else{
-
             initInterstitialAds()
-            //binding.viewDesc.isEnabled = false
         }
     }
+
+    // Función para inicializar el anuncio intersticial
     private fun initInterstitialAds() {
         var adRequest = com.google.android.gms.ads.AdRequest.Builder().build()
 
@@ -98,26 +128,21 @@ class HomeFragment : Fragment() {
             override fun onAdLoaded(interstitialAd : InterstitialAd) {
                 interstitial = interstitialAd
                 Toast.makeText(requireActivity(), "Anuncio encontrado", Toast.LENGTH_SHORT).show()
-
-                //binding.viewDesc.isEnabled=true
                 showInterstitial()
             }
 
             override fun onAdFailedToLoad(p0: LoadAdError) {
                 interstitial=null
                 Toast.makeText(requireActivity(), "Verifique su conexion", Toast.LENGTH_SHORT).show()
-                //binding.viewDesc.isEnabled=true
             }
         }
-
         )
     }
 
-    /*Funcion que abre link de whatsapp*/
+    // Función para abrir un enlace en WhatsApp
     private fun openUrl(link: String) {
         val uri = Uri.parse(link)
         val inte = Intent(Intent.ACTION_VIEW, uri)
-
         startActivity(inte)
     }
 
@@ -125,6 +150,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         binding = null // Libera la referencia para evitar posibles fugas de memoria
     }
-
-
 }

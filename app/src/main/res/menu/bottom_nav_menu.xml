@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/HomeFragment"
         android:title="Inicio"
         android:icon="@drawable/nav_home"/>
-
     <item
         android:id="@+id/productsFragment"
         android:title="Productos"
         android:icon="@drawable/ic_shopping_bag" />
-
     <item
         android:title="GORI"/>
-
     <item
         android:id="@+id/featuredFragment"
         android:title="Lanzamientos"
         android:icon="@drawable/ic_destacado"/>
-
     <item
         android:id="@+id/newsFragment"
         android:title="Novedades"
         android:icon="@drawable/ic_notifications" />
-
 </menu>
